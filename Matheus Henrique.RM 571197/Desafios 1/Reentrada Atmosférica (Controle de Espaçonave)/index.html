@@ -90,11 +90,13 @@
 
     <script>
         const btn = document.getElementById('btnCalcular');
+        const display = document.getElementById("resultado-logica")
         //Chamar váriavel display seguir padrão de da variavel btn
 
         //Liga o seu código HTML à ação do usuário
         btn.addEventListener('click', () => {
             const angulo = parseFloat(document.getElementById('anguloInput').value);
+            const escudo = parseFloat(document.getElementById('escudoInput').value);
             //Chamar váriavel escudo seguir padrão de da variavel angulo objeto (resultado-logica)
             
             let mensagem = "";
@@ -109,11 +111,23 @@
             if (isNaN(angulo) || isNaN(escudo)) {
                 mensagem = "❌ Insira os dados da telemetria!";
                 cor = "#f85149";
+            }
+            else if (angulo < 6.7){
+                mensagem = "❌ insira um angulo valido"
+                cor = "#f85149";
             } 
+            else if (escudo < 100){
+                mensagem = "❌ insira um valor valido para o escudo"
+                cor = "#f85149";
+            }
+            else {
+                mensagem ="✅ bem vindo de volta a terra"
+            }
             //Segue Continuidade da Lógica....
 
             display.innerText = mensagem;
             display.style.color = cor;
+            display.style.borderColor = cor;
             //Chamar borderColor seguir padrão display.style.color = cor;
         });
     </script>

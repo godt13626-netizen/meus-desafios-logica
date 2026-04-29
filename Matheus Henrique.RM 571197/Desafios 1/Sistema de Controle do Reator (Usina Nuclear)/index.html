@@ -98,13 +98,15 @@
     <script>
         // 1. Capturar o botão e o campo de saída (monitor)
         const btn = document.getElementById('btnCheck');
-        // Chamar variável monitor seguindo o padrão da variável btn usando o objeto (resultado-logica) 
+        const monitor = document.getElementById("resultado-logica")
 
         // 2. Evento de Clique
         btn.addEventListener('click', () => {
             
             // 3. Capturar os valores dos inputs
             const temp = parseFloat(document.getElementById('tempInput').value);
+            const pres = parseFloat(document.getElementById('presinput').value);
+            const hastes = parseFloat(document.getElementById('hastesinput').value);
             // Chamar variável pres (pressão) seguindo o padrão
             // Chamar variável hastes seguindo o padrão
             
@@ -125,12 +127,26 @@
             if (isNaN(temp) || isNaN(pres) || isNaN(hastes)) {
                 msg = "ERRO: SENSORES ILEGÍVEIS";
                 cor = "#ffff00";
-            } 
+            }
+            else if (temp >2000 || pres > 90){
+                mensagem = "urgente: risco eminente de exploção"
+                cor = "#ff0000";
+            }
+            else if (temp > 800 || hastes <10 ){
+                mensagem = "alerta temperatura bem elevada"
+                cor = "ffff00";
+
+            }
+            else{
+                mensagem = "sistema sobre controle"
+                cor = "#00ff00";
+            }
             //Continue a lógica aqui....
 
             // 4. Exibir os resultados no monitor (DOM)
             monitor.innerText = msg;
             monitor.style.color = cor;
+            monitor.style.borderColor = cor;
             // Chamar borderColor seguir o padrão acima
             
         });

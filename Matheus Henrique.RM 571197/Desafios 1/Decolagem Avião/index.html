@@ -114,20 +114,22 @@
 
     <script>
         const btn = document.getElementById('btnVerificar');
-        //Chamar váriavel campoTexto seguir padrão de da variavel btn usando objeto (resultado-logica)
+        const campoTexto = document.getElementById("resultado-logica")
 
         btn.addEventListener('click', () => {
             // Entradas de dados
             const combustivel = parseFloat(document.getElementById('combustivel').value);
-            //criar variável peso seguir padrão de da variavel combustivel
-             //criar variável vento seguir padrão de variavel combustivel
+            const peso = parseFloat(document.getElementById("peso").value)
+            const vento = parseFloat(document.getElementById("vento").value)
             const flapsAjustados = document.getElementById('flaps').checked;
-            //criar Variável autorizacaoTorre vento seguir padrão de variavel flapsAjustados
+            const autorizacaoTorre = document.getElementById('torre').checked;
 
             let mensagem = "";
             let cor = "";
             let decolagemOk = true;
 
+           
+            
             //"#3fb950"; // Verde
             //"#f85149"; //Vermelho
             //"#d29922"; // Amarelo
@@ -141,20 +143,46 @@
                 cor = "#f85149"; // Rosa/Vermelho
             } 
             //Continue Aqui a lógica de bloqueio do voo......
-
-
-
-           // --- RESULTADO FINAL ---
+            else if (!flapsAjustados){
+                mensagem = "decolagem abortada:Flaps nao ajustados"
+                decolagemOk = false
+                cor = "#f85149";
+            }
+            else if (peso > 40){
+                mensagem = "decolagem abortada:Peso limite atingido"
+                decolagemOk = false
+                cor = '#f85149';
+            }
+            else if (combustivel < 30){
+                mensagem = "decolagem abortada:Sem combustivel"
+                decolagemOk = false
+                cor = "#f85149";
+            }
+            else if (vento >30){
+                mensagem = "decolagem abortada:ventos fortes"
+                decolagemOk = false
+                cor = "#f85149";
+            }
+            else{
+                mensagem="decolagem autorizada"
+                decolagemOk = true
+                cor = "#3fb950";
+            }
+           
+            // --- RESULTADO FIN
+            // AL ---
             if (decolagemOk) {
+               mensagem = "decolagem autorizada"
                 //Coloque aqui o resultado final
             } else {
+               mensagem = "decolagem nao autorizada"
                 //Saida padrão
             }
            
 
             campoTexto.innerText = mensagem;
             campoTexto.style.color = cor;
-            //Chamar borderColor seguir padrão display.style.color = cor;
+            campoTexto.style.borderColor = cor;
         });
     </script>
     
